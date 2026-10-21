@@ -1,0 +1,6 @@
+@extends('layouts.store')
+@section('title','About Us')
+@section('content')
+<section class="bg-paper py-16"><div class="site-container max-w-4xl text-center"><p class="section-eyebrow">Welcome to FurniCasa</p><h1 class="mt-3 font-serif text-5xl">Live Beautifully</h1><p class="mx-auto mt-6 max-w-2xl text-base leading-9 text-stone-600">We believe furniture should feel as special as the memories you create around it. FurniCasa brings thoughtful design and everyday comfort into the places you call home.</p></div></section>
+<div class="site-container grid gap-12 py-16 md:grid-cols-2 md:items-center"><img class="w-full object-cover" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=950&q=85" alt="Calm and beautifully furnished interior"><div><p class="section-eyebrow">Our Philosophy</p><h2 class="section-heading mt-3">Spaces Worth Coming Home To</h2><p class="mt-6 text-sm leading-8 text-stone-600">From a comfortable sofa to a carefully considered dining table, our collections focus on natural materials, elegant silhouettes and enduring quality. We curate pieces that work as beautifully as they look.</p><a href="{{ route('shop') }}" class="btn-dark mt-6">Explore our collection</a></div></div>
+@endsection

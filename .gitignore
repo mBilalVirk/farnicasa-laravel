@@ -1,0 +1,13 @@
+/vendor/
+/node_modules/
+/public/build/
+/public/hot
+/public/storage
+.env
+/database/*.sqlite
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+!.gitignore
