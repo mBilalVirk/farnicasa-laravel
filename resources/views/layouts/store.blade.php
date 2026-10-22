@@ -8,6 +8,7 @@
  @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body class="min-h-screen">
+ @include('partials.toasts')
  <div class="bg-[#242424] text-white/90 text-[10px] sm:text-xs">
   <div class="site-container flex min-h-8 items-center justify-between gap-4 py-1">
    <span>♧ &nbsp; {{ $settings['announcement']??'FREE DELIVERY on all orders $499+' }}</span>
@@ -42,9 +43,7 @@
   <div data-mobile-menu class="hidden border-t border-stone-100 bg-white px-6 py-5 shadow-soft lg:hidden"><div class="flex flex-col gap-4 text-sm font-medium"><a href="{{ route('home') }}">Home</a><a href="{{ route('shop') }}">Shop All</a>@foreach($categories as $category)<a href="{{ route('categories.show',$category) }}">{{ $category->name }}</a>@endforeach<a href="{{ route('about') }}">About Us</a><a href="{{ route('contact') }}">Contact</a></div></div>
  </header>
  <main>
-  @if(session('success'))<div class="site-container mt-5"><div role="status" class="rounded-md border border-emerald-200 bg-emerald-50 px-5 py-3 text-sm text-emerald-800">{{ session('success') }}</div></div>@endif
-  @if($errors->any())<div class="site-container mt-5"><div role="alert" class="rounded-md border border-red-200 bg-red-50 px-5 py-3 text-sm text-red-800"><strong>Please check the following:</strong><ul class="mt-1 list-inside list-disc">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div></div>@endif
-  @yield('content')
+   @yield('content')
  </main>
  <footer class="border-t border-stone-100 bg-[#faf9f6] pt-14">
   <div class="site-container grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-5">

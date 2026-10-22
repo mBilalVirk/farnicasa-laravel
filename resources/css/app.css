@@ -2,30 +2,254 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
- html { scroll-behavior: smooth; }
- body { @apply font-sans text-ink antialiased bg-white; }
- h1,h2,h3 { @apply tracking-tight; }
- input,select,textarea { @apply focus:border-olive focus:ring-olive; }
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply font-sans text-ink antialiased bg-white;
+    }
+
+    h1,
+    h2,
+    h3 {
+        @apply tracking-tight;
+    }
+
+    input,
+    select,
+    textarea {
+        @apply focus:border-olive focus:ring-olive;
+    }
 }
+
 @layer components {
- .site-container { @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12; }
- .btn-dark { @apply inline-flex items-center justify-center gap-2 rounded-sm bg-ink px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#474437] focus:outline-none focus:ring-2 focus:ring-olive focus:ring-offset-2; }
- .btn-outline { @apply inline-flex items-center justify-center gap-2 rounded-sm border border-[#beb9a9] bg-white/60 px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-cream; }
- .section-eyebrow { @apply text-[11px] font-bold uppercase tracking-[.24em] text-olive; }
- .section-heading { @apply font-serif text-3xl sm:text-4xl text-ink; }
- .field { @apply block w-full rounded-md border border-stone-300 bg-white px-4 py-3 text-sm text-ink placeholder:text-stone-400 focus:border-olive focus:ring-olive; }
- .field-label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-stone-700; }
- .panel { @apply rounded-xl border border-stone-200 bg-white p-5 shadow-sm; }
- .admin-table { @apply w-full min-w-[720px] text-left text-sm; }
- .admin-table th { @apply whitespace-nowrap bg-stone-50 px-4 py-3 font-semibold text-stone-600; }
- .admin-table td { @apply border-b border-stone-100 px-4 py-3 align-middle; }
- .admin-nav-link { @apply flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-stone-600 transition hover:bg-[#eeeae0] hover:text-ink; }
- .admin-nav-link.active { @apply bg-[#e8e1d2] text-ink font-bold; }
- .status-pill { @apply inline-block rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold capitalize text-stone-700; }
+    .site-container {
+        @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12;
+    }
+
+    .btn-dark {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm bg-ink px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#474437] focus:outline-none focus:ring-2 focus:ring-olive focus:ring-offset-2;
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm border border-[#beb9a9] bg-white/60 px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-cream;
+    }
+
+    .section-eyebrow {
+        @apply text-[11px] font-bold uppercase tracking-[.24em] text-olive;
+    }
+
+    .section-heading {
+        @apply font-serif text-3xl sm:text-4xl text-ink;
+    }
+
+    .field {
+        @apply block w-full rounded-md border border-stone-300 bg-white px-4 py-3 text-sm text-ink placeholder:text-stone-400 focus:border-olive focus:ring-olive;
+    }
+
+    .field-label {
+        @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-stone-700;
+    }
+
+    .panel {
+        @apply rounded-xl border border-stone-200 bg-white p-5 shadow-sm;
+    }
+
+    .admin-table {
+        @apply w-full min-w-[720px] text-left text-sm;
+    }
+
+    .admin-table th {
+        @apply whitespace-nowrap bg-stone-50 px-4 py-3 font-semibold text-stone-600;
+    }
+
+    .admin-table td {
+        @apply border-b border-stone-100 px-4 py-3 align-middle;
+    }
+
+    .admin-nav-link {
+        @apply flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-stone-600 transition hover:bg-[#eeeae0] hover:text-ink;
+    }
+
+    .admin-nav-link.active {
+        @apply bg-[#e8e1d2] text-ink font-bold;
+    }
+
+    .status-pill {
+        @apply inline-block rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold capitalize text-stone-700;
+    }
 }
-[x-cloak] {display:none!important;}
-.hero-cover { background-position: center; background-size: cover; }
-.product-photo { aspect-ratio: 1.12 / 1; object-fit: cover; width: 100%; }
-.category-photo { aspect-ratio: 1.42 / 1; object-fit: cover; width: 100%; }
-input[type='number']::-webkit-inner-spin-button,input[type='number']::-webkit-outer-spin-button {opacity:1;}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.hero-cover {
+    background-position: center;
+    background-size: cover;
+}
+
+.product-photo {
+    aspect-ratio: 1.12 / 1;
+    object-fit: cover;
+    width: 100%;
+}
+
+.category-photo {
+    aspect-ratio: 1.42 / 1;
+    object-fit: cover;
+    width: 100%;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+.toast-stack {
+    position: fixed;
+    z-index: 100;
+    top: 1.25rem;
+    right: 1.25rem;
+    display: grid;
+    width: min(24rem, calc(100vw - 2rem));
+    gap: .75rem;
+    pointer-events: none;
+}
+
+.toast {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .875rem;
+    overflow: hidden;
+    min-height: 4.25rem;
+    padding: .875rem 2.75rem .875rem 1rem;
+    border: 1px solid #e7e5e4;
+    border-radius: .875rem;
+    background: #fff;
+    box-shadow: 0 16px 45px rgba(37, 36, 31, .16);
+    color: #25241f;
+    opacity: 0;
+    transform: translate3d(1rem, -.25rem, 0);
+    transition: opacity .25s ease, transform .25s ease;
+    pointer-events: auto;
+}
+
+.toast.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.toast.is-leaving {
+    opacity: 0;
+    transform: translate3d(1rem, -.25rem, 0);
+}
+
+.toast__icon {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 2rem;
+    place-items: center;
+    border-radius: 9999px;
+}
+
+.toast__icon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+.toast--success .toast__icon {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.toast--error .toast__icon {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.toast--warning .toast__icon {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+.toast--info .toast__icon {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.toast__message {
+    margin: 0;
+    font-size: .875rem;
+    line-height: 1.4;
+}
+
+.toast__close {
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    place-items: center;
+    border: 0;
+    border-radius: .375rem;
+    background: transparent;
+    color: #78716c;
+    cursor: pointer;
+}
+
+.toast__close:hover {
+    background: #f5f5f4;
+    color: #292524;
+}
+
+.toast__close svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.toast__progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    transform: scaleX(1);
+    transform-origin: left;
+    animation: toast-countdown linear forwards;
+    background: #8f8961;
+}
+
+.toast--error .toast__progress {
+    background: #dc2626;
+}
+
+.toast--warning .toast__progress {
+    background: #d97706;
+}
+
+.toast--info .toast__progress {
+    background: #2563eb;
+}
+
+@keyframes toast-countdown {
+    to {
+        transform: scaleX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        transition: none;
+    }
+
+    .toast__progress {
+        animation: none;
+    }
+}
