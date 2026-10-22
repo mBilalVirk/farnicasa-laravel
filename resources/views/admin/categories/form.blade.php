@@ -2,7 +2,7 @@
 @section('title', $category->exists ? 'Edit Category' : 'New Category')
 @section('content')
     <a href="{{ route('admin.categories.index') }}" class="text-sm text-olive">
-        ← Back to Categories</a>
+        <x-icon name="arrow-left" class="mr-1 inline h-4 w-4" />Back to Categories</a>
     <h1 class="my-6 font-serif text-4xl">{{ $category->exists ? 'Edit Category' : 'New Category' }}</h1>
     <form method="POST"
         action="{{ $category->exists ? route('admin.categories.update', $category) : route('admin.categories.store') }}"

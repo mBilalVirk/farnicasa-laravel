@@ -12,14 +12,18 @@
                     Space</h1>
                 <p class="mt-5 max-w-[345px] text-sm leading-7 text-stone-700">Discover a wide range of stylish, comfortable,
                     and durable furniture pieces crafted for every room.</p>
-                <div class="mt-7 flex flex-wrap gap-3"><a href="{{ route('shop') }}" class="btn-dark">Shop Collection <span
-                            aria-hidden="true">→</span></a><a href="#sale" class="btn-outline">Explore Deals</a></div>
+                <div class="mt-7 flex flex-wrap gap-3"><a href="{{ route('shop') }}" class="btn-dark">Shop Collection <x-icon
+                            name="arrow-right" class="h-4 w-4" /></a><a href="#sale" class="btn-outline">Explore Deals</a>
+                </div>
                 <div class="mt-10 flex flex-wrap gap-5 text-[11px] sm:gap-8">
-                    <div class="flex gap-2"><span class="text-2xl text-olive">♧</span><span><strong class="block">Free
+                    <div class="flex items-center gap-2"><x-icon name="truck" class="h-6 w-6 text-olive" /><span><strong
+                                class="block">Free
                                 Shipping</strong><span class="text-stone-500">On orders $499+</span></span></div>
-                    <div class="flex gap-2"><span class="text-2xl text-olive">◷</span><span><strong class="block">30-Day
+                    <div class="flex items-center gap-2"><x-icon name="clock" class="h-6 w-6 text-olive" /><span><strong
+                                class="block">30-Day
                                 Returns</strong><span class="text-stone-500">Hassle-free returns</span></span></div>
-                    <div class="flex gap-2"><span class="text-2xl text-olive">▣</span><span><strong class="block">Secure
+                    <div class="flex items-center gap-2"><x-icon name="shield" class="h-6 w-6 text-olive" /><span><strong
+                                class="block">Secure
                                 Checkout</strong><span class="text-stone-500">Protected ordering</span></span></div>
                 </div>
             </div>
@@ -52,7 +56,7 @@
                 <p class="mt-3 text-xs">Transform your space for less.</p><a
                     href="{{ route('shop', ['sort' => 'price_asc']) }}" class="btn-dark mt-5 !px-5 !py-2.5 !text-xs">Shop
                     the
-                    Sale &nbsp; →</a>
+                    Sale <x-icon name="arrow-right" class="ml-1 inline h-4 w-4" /></a>
             </div>
         </div>
     </section>
@@ -62,7 +66,8 @@
                 <p class="section-eyebrow">Handpicked for You</p>
                 <h2 class="mt-2 section-heading">Best Sellers</h2>
             </div><a href="{{ route('shop') }}"
-                class="text-xs font-semibold underline underline-offset-4 hover:text-olive">View All Products →</a>
+                class="text-xs font-semibold underline underline-offset-4 hover:text-olive">View All Products <x-icon
+                    name="arrow-right" class="inline h-4 w-4" /></a>
         </div>
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 lg:gap-5">
             @foreach ($featured as $product)
@@ -72,8 +77,8 @@
     </section>
     <section class="bg-[#f9f8f5] py-9">
         <div class="site-container grid grid-cols-2 gap-8 md:grid-cols-4">
-            @foreach ([['♙', 'Premium Quality', 'Carefully crafted for durability & comfort'], ['♧', 'Affordable Prices', 'Beautiful furniture at unbeatable prices'], ['♧', 'Expert Support', 'We are here to help before & after purchase'], ['♻', 'Sustainable Choice', 'Thoughtful materials for a better tomorrow']] as $feature)
-                <div class="flex items-start gap-3"><span class="mt-1 text-2xl text-olive">{{ $feature[0] }}</span>
+            @foreach ([['package', 'Premium Quality', 'Carefully crafted for durability & comfort'], ['tag', 'Affordable Prices', 'Beautiful furniture at unbeatable prices'], ['headset', 'Expert Support', 'We are here to help before & after purchase'], ['recycle', 'Sustainable Choice', 'Thoughtful materials for a better tomorrow']] as $feature)
+                <div class="flex items-start gap-3"><x-icon :name="$feature[0]" class="mt-1 h-6 w-6 shrink-0 text-olive" />
                     <div>
                         <h3 class="text-xs font-bold">{{ $feature[1] }}</h3>
                         <p class="mt-1 text-xs leading-5 text-stone-500">{{ $feature[2] }}</p>
@@ -119,7 +124,11 @@
             <div class="mt-8 grid gap-5 md:grid-cols-3">
                 @foreach ($testimonials as $review)
                     <div class="bg-paper p-7">
-                        <p class="tracking-widest text-[#b59c51]">{{ str_repeat('★', $review->rating) }}</p>
+                        <p class="flex text-[#b59c51]" aria-label="Rated {{ $review->rating }} out of 5">
+                            @for ($star = 0; $star < $review->rating; $star++)
+                                <x-icon name="star" class="h-4 w-4" filled />
+                            @endfor
+                        </p>
                         <p class="mt-4 text-sm leading-7 text-stone-700">“{{ $review->comment }}”</p>
                         <p class="mt-5 text-xs font-bold">{{ $review->user->name }}</p>
                         <p class="mt-1 text-xs text-muted">Purchased: {{ $review->product->name }}</p>

@@ -21,7 +21,8 @@
                     id="subject" value="{{ old('subject') }}" required></div>
             <div><label class="field-label" for="message">Message</label>
                 <textarea class="field" name="message" id="message" rows="7" required>{{ old('message') }}</textarea>
-            </div><button type="submit" class="btn-dark">Send Message →</button>
+            </div><button type="submit" class="btn-dark">Send Message <x-icon name="arrow-right"
+                    class="h-4 w-4" /></button>
         </form>
         <aside class="bg-paper p-8">
             <h2 class="font-serif text-2xl">Contact Details</h2>

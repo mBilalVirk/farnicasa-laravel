@@ -48,7 +48,8 @@
                             </option>
                             <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Name: A to Z</option>
                         </select></div>
-                    <button class="btn-dark w-full" type="submit">Apply Filters →</button><a href="{{ route('shop') }}"
+                    <button class="btn-dark w-full" type="submit">Apply Filters <x-icon name="arrow-right"
+                            class="h-4 w-4" /></button><a href="{{ route('shop') }}"
                         class="block text-center text-xs underline text-stone-500">Clear filters</a>
                 </form>
             </aside>

@@ -2,7 +2,7 @@
 @section('title', $coupon->exists ? 'Edit Coupon' : 'New Coupon')
 @section('content')
     <a href="{{ route('admin.coupons.index') }}" class="text-sm text-olive">
-        ← Back to Coupons</a>
+        <x-icon name="arrow-left" class="mr-1 inline h-4 w-4" />Back to Coupons</a>
     <h1 class="my-6 font-serif text-4xl">{{ $coupon->exists ? 'Edit Coupon' : 'Create Coupon' }}</h1>
     <form method="POST"
         action="{{ $coupon->exists ? route('admin.coupons.update', $coupon) : route('admin.coupons.store') }}"

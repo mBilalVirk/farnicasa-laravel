@@ -72,7 +72,8 @@
                     <div class="flex justify-between border-t border-stone-200 pt-4 text-lg font-bold">
                         <span>Total</span><span>${{ number_format($total, 2) }}</span>
                     </div>
-                </div><button class="btn-dark mt-7 w-full">Place Order →</button>
+                </div><button class="btn-dark mt-7 w-full">Place Order <x-icon name="arrow-right"
+                        class="h-4 w-4" /></button>
                 <p class="mt-3 text-xs leading-5 text-stone-500">By placing your order you agree to be contacted regarding
                     your delivery.</p>
             </aside>

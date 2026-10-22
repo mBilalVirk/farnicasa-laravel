@@ -20,7 +20,11 @@
                     <tr>
                         <td>{{ $r->product?->name ?? 'Deleted product' }}</td>
                         <td>{{ $r->user?->name ?? 'Removed user' }}</td>
-                        <td><span class="text-[#b49d57]">{{ str_repeat('★', $r->rating) }}</span></td>
+                        <td><span class="flex text-[#b49d57]" aria-label="Rated {{ $r->rating }} out of 5">
+                                @for ($star = 0; $star < $r->rating; $star++)
+                                    <x-icon name="star" class="h-4 w-4" filled />
+                                @endfor
+                            </span></td>
                         <td class="max-w-md text-xs leading-6">{{ $r->comment }}</td>
                         <td>{{ $r->is_approved ? 'Approved' : 'Pending' }}</td>
                         <td>

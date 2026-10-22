@@ -13,7 +13,7 @@
                             name="password" id="password" autocomplete="current-password" required></div><label
                         class="flex items-center gap-2 text-sm text-stone-600"><input type="checkbox" name="remember"
                             value="1" class="rounded text-olive"> Remember me</label><button
-                        class="btn-dark w-full">Sign In →</button>
+                        class="btn-dark w-full">Sign In <x-icon name="arrow-right" class="h-4 w-4" /></button>
                 </form>
                 <p class="mt-6 text-center text-sm text-stone-500">New here? <a class="font-bold text-olive underline"
                         href="{{ route('register') }}">Create an account</a></p>

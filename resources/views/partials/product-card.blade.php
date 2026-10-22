@@ -14,17 +14,14 @@
             <form method="POST" action="{{ route('cart.add', $product) }}">@csrf<input type="hidden" name="quantity"
                     value="1"><button type="submit" {{ $product->stock < 1 ? 'disabled' : '' }}
                     title="Add {{ $product->name }} to cart" aria-label="Add {{ $product->name }} to cart"
-                    class="flex h-8 w-8 items-center justify-center border border-stone-300 transition hover:bg-ink hover:text-white disabled:cursor-not-allowed disabled:opacity-30"><svg
-                        width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"
-                        viewBox="0 0 24 24">
-                        <path d="M3 4h2l2.5 12h11.3L21 7H6" />
-                        <path d="M12 9v5m-2.5-2.5h5" />
-                        <circle cx="9" cy="20" r="1" />
-                        <circle cx="18" cy="20" r="1" />
-                    </svg></button></form>
+                    class="flex h-8 w-8 items-center justify-center border border-stone-300 transition hover:bg-ink hover:text-white disabled:cursor-not-allowed disabled:opacity-30"><x-icon
+                        name="cart-plus" class="h-[17px] w-[17px]" /></button></form>
         </div>
-        <div class="mt-1 flex items-center gap-2 text-[11px]"><span
-                class="tracking-widest text-[#b59c51]">★★★★★</span><span
-                class="text-stone-400">{{ $product->stock ? 'In stock' : 'Sold out' }}</span></div>
+        <div class="mt-1 flex items-center gap-2 text-[11px]"><span class="flex text-[#b59c51]"
+                aria-label="Rated 5 out of 5">
+                @for ($star = 0; $star < 5; $star++)
+                    <x-icon name="star" class="h-3 w-3" filled />
+                @endfor
+            </span><span class="text-stone-400">{{ $product->stock ? 'In stock' : 'Sold out' }}</span></div>
     </div>
 </article>

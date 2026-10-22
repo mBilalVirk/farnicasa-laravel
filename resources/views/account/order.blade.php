@@ -7,7 +7,8 @@
                 <p class="section-eyebrow">Thank you for shopping with us</p>
                 <h1 class="mt-2 font-serif text-4xl">Order {{ $order->order_number }}</h1>
                 <p class="mt-2 text-sm text-muted">Placed {{ $order->created_at->format('F j, Y') }}</p>
-            </div><a href="{{ route('account.orders') }}" class="btn-outline">My Orders →</a>
+            </div><a href="{{ route('account.orders') }}" class="btn-outline">My Orders <x-icon name="arrow-right"
+                    class="h-4 w-4" /></a>
         </div>
         <div class="grid gap-8 lg:grid-cols-[1fr_340px]">
             <div class="panel">

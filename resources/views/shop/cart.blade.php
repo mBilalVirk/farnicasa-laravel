@@ -53,7 +53,8 @@
                             </table>
                         </div>
                         <div class="mt-6 flex items-center justify-between"><a href="{{ route('shop') }}"
-                                class="text-sm underline underline-offset-4">← Continue shopping</a><button type="submit"
+                                class="text-sm underline underline-offset-4"><x-icon name="arrow-left"
+                                    class="mr-1 inline h-4 w-4" />Continue shopping</a><button type="submit"
                                 class="btn-outline">Update Cart</button></div>
                     </form>
                     @foreach ($items as $item)
@@ -85,7 +86,8 @@
                                 class="field min-w-0 flex-1 uppercase" placeholder="Promo code"><button
                                 class="btn-outline !px-3">Apply</button></form>
                     @endif
-                    <a href="{{ route('checkout.index') }}" class="btn-dark mt-7 w-full">Proceed to Checkout →</a>
+                    <a href="{{ route('checkout.index') }}" class="btn-dark mt-7 w-full">Proceed to Checkout <x-icon
+                            name="arrow-right" class="h-4 w-4" /></a>
                     <p class="mt-4 text-center text-xs text-stone-500">Taxes and shipping calculated above.</p>
                 </aside>
             </div>

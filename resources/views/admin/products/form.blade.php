@@ -2,7 +2,8 @@
 @section('title', $product->exists ? 'Edit Product' : 'New Product')
 @section('content')
     <div class="mb-7">
-        <a class="text-sm text-olive" href="{{ route('admin.products.index') }}">← Back to Products</a>
+        <a class="text-sm text-olive" href="{{ route('admin.products.index') }}"><x-icon name="arrow-left"
+                class="mr-1 inline h-4 w-4" />Back to Products</a>
         <h1 class="mt-2 font-serif text-4xl">{{ $product->exists ? 'Edit Product' : 'Create Product' }}</h1>
     </div>
     <form method="POST" enctype="multipart/form-data"
@@ -83,7 +84,8 @@
                     Visible on storefront</label><label class="flex gap-2 text-sm"><input class="rounded text-olive"
                         type="checkbox" name="is_featured" value="1"
                         {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}> Featured product</label>
-            </div><button class="btn-dark w-full">{{ $product->exists ? 'Save Changes' : 'Create Product' }} →</button>
+            </div><button class="btn-dark w-full">{{ $product->exists ? 'Save Changes' : 'Create Product' }} <x-icon
+                    name="arrow-right" class="h-4 w-4" /></button>
         </div>
     </form>
 @endsection

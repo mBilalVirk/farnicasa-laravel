@@ -7,17 +7,20 @@
         <div class="mt-8 grid gap-5 sm:grid-cols-3"><a href="{{ route('account.orders') }}" class="panel hover:bg-paper">
                 <p class="section-eyebrow">My orders</p>
                 <p class="mt-2 font-serif text-3xl">{{ auth()->user()->orders()->count() }}</p>
-                <p class="mt-2 text-sm text-stone-500">View order history →</p>
+                <p class="mt-2 flex items-center gap-1 text-sm text-stone-500">View order history <x-icon name="arrow-right"
+                        class="h-4 w-4" /></p>
             </a><a href="{{ route('account.profile') }}" class="panel hover:bg-paper">
                 <p class="section-eyebrow">My profile</p>
                 <h2 class="mt-2 font-serif text-2xl">Your Details</h2>
-                <p class="mt-2 text-sm text-stone-500">Update your contact info →</p>
+                <p class="mt-2 flex items-center gap-1 text-sm text-stone-500">Update your contact info <x-icon
+                        name="arrow-right" class="h-4 w-4" /></p>
             </a>
             @if (auth()->user()->isAdmin())
                 <a href="{{ route('admin.dashboard') }}" class="panel hover:bg-paper">
                     <p class="section-eyebrow">Administration</p>
                     <h2 class="mt-2 font-serif text-2xl">Store Dashboard</h2>
-                    <p class="mt-2 text-sm text-stone-500">Manage products and orders →</p>
+                    <p class="mt-2 flex items-center gap-1 text-sm text-stone-500">Manage products and orders <x-icon
+                            name="arrow-right" class="h-4 w-4" /></p>
                 </a>
             @endif
         </div>

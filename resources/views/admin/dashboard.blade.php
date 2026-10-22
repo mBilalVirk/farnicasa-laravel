@@ -9,11 +9,12 @@
         </div><a href="{{ route('admin.products.create') }}" class="btn-dark">+ Add Product</a>
     </div>
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        @foreach ([['Revenue (Paid)', '$' . number_format($stats['revenue'], 2), '↗'], ['Total Orders', number_format($stats['orders']), '▤'], ['Customers', number_format($stats['customers']), '♙'], ['Low Stock Products', $stats['lowStock'], '!']] as $card)
+        @foreach ([['Revenue (Paid)', '$' . number_format($stats['revenue'], 2), 'external-link'], ['Total Orders', number_format($stats['orders']), 'orders'], ['Customers', number_format($stats['customers']), 'users'], ['Low Stock Products', $stats['lowStock'], 'alert']] as $card)
             <div class="panel">
                 <div class="flex items-center justify-between"><span
                         class="text-xs font-semibold uppercase tracking-wide text-stone-500">{{ $card[0] }}</span><span
-                        class="flex h-9 w-9 items-center justify-center rounded-lg bg-paper text-xl text-olive">{{ $card[2] }}</span>
+                        class="flex h-9 w-9 items-center justify-center rounded-lg bg-paper text-olive"><x-icon
+                            :name="$card[2]" class="h-5 w-5" /></span>
                 </div>
                 <div class="mt-4 text-3xl font-semibold tracking-tight">{{ $card[1] }}</div>
             </div>
@@ -43,8 +44,7 @@
                                 <td>{{ $order->name }}</td>
                                 <td>${{ number_format($order->total, 2) }}</td>
                                 <td><span class="status-pill">{{ $order->status }}</span></td>
-                                <td><a href="{{ route('admin.orders.show', $order) }}"
-                                        class="text-olive underline">View</a>
+                                <td><a href="{{ route('admin.orders.show', $order) }}" class="text-olive underline">View</a>
                                 </td>
                         </tr>@empty<tr>
                                 <td colspan="5">No orders yet.</td>

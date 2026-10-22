@@ -14,17 +14,20 @@
             <div class="flex h-[72px] items-center justify-between border-b border-stone-100 px-6"><a
                     href="{{ route('admin.dashboard') }}" class="font-serif text-2xl">FurniCasa <span
                         class="text-xs font-sans text-olive">ADMIN</span></a><button aria-label="Toggle admin menu"
-                    data-toggle-menu aria-expanded="false" class="lg:hidden">☰</button></div>
+                    data-toggle-menu aria-expanded="false" class="lg:hidden"><x-icon name="menu"
+                        class="h-6 w-6" /></button></div>
             <nav data-mobile-menu class="hidden space-y-1 px-3 py-5 lg:block">
-                @foreach ([['admin.dashboard', 'Overview', '◫'], ['admin.orders.index', 'Orders', '▤'], ['admin.products.index', 'Products', '▣'], ['admin.categories.index', 'Categories', '◈'], ['admin.inventory.index', 'Inventory', '◴'], ['admin.coupons.index', 'Coupons', '◇'], ['admin.customers.index', 'Customers', '♙'], ['admin.reviews.index', 'Reviews', '☆'], ['admin.contacts.index', 'Messages', '✉'], ['admin.newsletters.index', 'Subscribers', '✉'], ['admin.settings.index', 'Settings', '⚙']] as $link)
+                @foreach ([['admin.dashboard', 'Overview', 'dashboard'], ['admin.orders.index', 'Orders', 'orders'], ['admin.products.index', 'Products', 'package'], ['admin.categories.index', 'Categories', 'category'], ['admin.inventory.index', 'Inventory', 'box'], ['admin.coupons.index', 'Coupons', 'tag'], ['admin.customers.index', 'Customers', 'users'], ['admin.reviews.index', 'Reviews', 'star'], ['admin.contacts.index', 'Messages', 'mail'], ['admin.newsletters.index', 'Subscribers', 'mail'], ['admin.settings.index', 'Settings', 'settings']] as $link)
                     <a href="{{ route($link[0]) }}"
                         class="admin-nav-link {{ request()->routeIs($link[0]) || (str_contains($link[0], 'products.index') && request()->routeIs('admin.products.*')) || (str_contains($link[0], 'categories.index') && request()->routeIs('admin.categories.*')) || (str_contains($link[0], 'coupons.index') && request()->routeIs('admin.coupons.*')) || (str_contains($link[0], 'orders.index') && request()->routeIs('admin.orders.*')) ? 'active' : '' }}"><span
-                            class="w-5 text-center text-lg">{{ $link[2] }}</span>{{ $link[1] }}</a>
+                            class="w-5 text-center"><x-icon :name="$link[2]"
+                                class="h-5 w-5" /></span>{{ $link[1] }}</a>
                 @endforeach
                 <div class="my-4 border-t border-stone-100"></div><a class="admin-nav-link" href="{{ route('home') }}"
-                    target="_blank">↗ &nbsp; View Storefront</a>
+                    target="_blank"><x-icon name="external-link" class="h-4 w-4" />View Storefront</a>
                 <form method="POST" action="{{ route('logout') }}">@csrf<button
-                        class="admin-nav-link w-full text-left">⇥ &nbsp; Log Out</button></form>
+                        class="admin-nav-link w-full text-left"><x-icon name="logout" class="h-4 w-4" />Log
+                        Out</button></form>
             </nav>
         </aside>
         <div class="min-w-0 flex-1 lg:ml-[252px]">

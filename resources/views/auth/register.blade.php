@@ -15,7 +15,8 @@
                             name="password" id="password" minlength="8" required></div>
                     <div><label class="field-label" for="password_confirmation">Confirm Password</label><input
                             class="field" type="password" name="password_confirmation" id="password_confirmation"
-                            minlength="8" required></div><button class="btn-dark w-full">Create Account →</button>
+                            minlength="8" required></div><button class="btn-dark w-full">Create Account <x-icon
+                            name="arrow-right" class="h-4 w-4" /></button>
                 </form>
                 <p class="mt-6 text-center text-sm text-stone-500">Already a member? <a
                         class="font-bold text-olive underline" href="{{ route('login') }}">Sign in</a></p>

@@ -12,10 +12,16 @@
             <div class="py-2">
                 <p class="section-eyebrow">{{ $product->category->name }} Collection</p>
                 <h1 class="mt-3 font-serif text-4xl lg:text-5xl">{{ $product->name }}</h1>
-                <div class="mt-4 flex items-center gap-3"><span class="text-[#b49d57]">★★★★★</span><span
-                        class="text-sm text-stone-500">{{ $rating ?: 'New' }} / 5 ·
+                <div class="mt-4 flex items-center gap-3"><span class="flex text-[#b49d57]"
+                        aria-label="Rated {{ $rating }} out of 5">
+                        @for ($star = 0; $star < 5; $star++)
+                            <x-icon name="star" class="h-4 w-4" :filled="$star < $rating" />
+                        @endfor
+                    </span>
+                    <span class="text-sm text-stone-500">{{ $rating ?: 'New' }} / 5 ·
                         {{ $product->approvedReviews->count() }}
-                        reviews</span></div>
+                        reviews</span>
+                </div>
                 <div class="mt-7 flex items-center gap-4"><span
                         class="text-3xl font-semibold">${{ number_format($product->price, 2) }}</span>
                     @if ($product->compare_at_price && $product->compare_at_price > $product->price)
@@ -53,12 +59,19 @@
                             max="{{ max(1, min(99, $product->stock)) }}" value="1"><button type="button"
                             data-step="1" class="px-4 py-3">+</button></div><button type="submit"
                         {{ !$product->stock ? 'disabled' : '' }}
-                        class="btn-dark flex-1 disabled:opacity-50">{{ $product->stock ? 'Add to Cart →' : 'Sold Out' }}</button>
+                        class="btn-dark flex-1 disabled:opacity-50">{{ $product->stock ? 'Add to Cart' : 'Sold Out' }}
+                        @if ($product->stock)
+                            <x-icon name="arrow-right" class="h-4 w-4" />
+                        @endif
+                    </button>
                 </form>
                 <div class="mt-6 grid gap-2 text-xs text-stone-600">
-                    <p>✓ Secure order placement</p>
-                    <p>✓ Free shipping on orders $499+</p>
-                    <p>✓ Care and support after purchase</p>
+                    <p class="flex items-center gap-2"><x-icon name="check" class="h-4 w-4 text-olive" />Secure order
+                        placement</p>
+                    <p class="flex items-center gap-2"><x-icon name="check" class="h-4 w-4 text-olive" />Free shipping on
+                        orders $499+</p>
+                    <p class="flex items-center gap-2"><x-icon name="check" class="h-4 w-4 text-olive" />Care and support
+                        after purchase</p>
                 </div>
             </div>
         </div>
@@ -67,7 +80,11 @@
             <div class="mt-6 grid gap-6 md:grid-cols-2">
                 @forelse($product->approvedReviews as $review)
                     <div class="border border-stone-200 p-5">
-                        <p class="text-[#b49d57]">{{ str_repeat('★', $review->rating) }}</p>
+                        <p class="flex text-[#b49d57]" aria-label="Rated {{ $review->rating }} out of 5">
+                            @for ($star = 0; $star < $review->rating; $star++)
+                                <x-icon name="star" class="h-4 w-4" filled />
+                            @endfor
+                        </p>
                         <p class="mt-3 text-sm leading-7">{{ $review->comment }}</p>
                         <p class="mt-4 text-xs font-bold">{{ $review->user->name }}</p>
                 </div>@empty<p class="text-sm text-stone-500">No reviews yet for this product.</p>
