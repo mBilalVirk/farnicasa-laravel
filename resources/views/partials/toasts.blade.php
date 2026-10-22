@@ -1,4 +1,3 @@
-```blade
 @php
     $toasts = [];
 
@@ -96,4 +95,3 @@
         @endforeach
     </div>
 @endif
-```
