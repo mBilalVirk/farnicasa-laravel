@@ -1,5 +1,56 @@
 @extends('layouts.store')
-@section('title','My Account')
+@section('title', 'My Account')
 @section('content')
-<div class="site-container py-12"><h1 class="section-heading">Hello, {{ auth()->user()->name }}!</h1><p class="mt-2 text-sm text-muted">Manage your orders and account details.</p><div class="mt-8 grid gap-5 sm:grid-cols-3"><a href="{{ route('account.orders') }}" class="panel hover:bg-paper"><p class="section-eyebrow">My orders</p><p class="mt-2 font-serif text-3xl">{{ auth()->user()->orders()->count() }}</p><p class="mt-2 text-sm text-stone-500">View order history →</p></a><a href="{{ route('account.profile') }}" class="panel hover:bg-paper"><p class="section-eyebrow">My profile</p><h2 class="mt-2 font-serif text-2xl">Your Details</h2><p class="mt-2 text-sm text-stone-500">Update your contact info →</p></a>@if(auth()->user()->isAdmin())<a href="{{ route('admin.dashboard') }}" class="panel hover:bg-paper"><p class="section-eyebrow">Administration</p><h2 class="mt-2 font-serif text-2xl">Store Dashboard</h2><p class="mt-2 text-sm text-stone-500">Manage products and orders →</p></a>@endif</div><h2 class="mt-12 font-serif text-2xl">Recent Orders</h2><div class="mt-5 overflow-x-auto"><table class="admin-table"><thead><tr><th>Order</th><th>Date</th><th>Status</th><th>Total</th><th></th></tr></thead><tbody>@forelse($orders as $order)<tr><td>{{ $order->order_number }}</td><td>{{ $order->created_at->format('M d, Y') }}</td><td><span class="status-pill">{{ $order->status }}</span></td><td>${{ number_format($order->total,2) }}</td><td><a class="text-olive underline" href="{{ route('account.orders.show',$order) }}">Details</a></td></tr>@empty<tr><td colspan="5" class="text-center">No orders yet.</td></tr>@endforelse</tbody></table></div><form method="POST" action="{{ route('logout') }}" class="mt-8">@csrf<button class="text-sm font-semibold text-red-600 underline">Sign out</button></form></div>
+    <div class="site-container py-12">
+        <h1 class="section-heading">Hello, {{ auth()->user()->name }}!</h1>
+        <p class="mt-2 text-sm text-muted">Manage your orders and account details.</p>
+        <div class="mt-8 grid gap-5 sm:grid-cols-3"><a href="{{ route('account.orders') }}" class="panel hover:bg-paper">
+                <p class="section-eyebrow">My orders</p>
+                <p class="mt-2 font-serif text-3xl">{{ auth()->user()->orders()->count() }}</p>
+                <p class="mt-2 text-sm text-stone-500">View order history →</p>
+            </a><a href="{{ route('account.profile') }}" class="panel hover:bg-paper">
+                <p class="section-eyebrow">My profile</p>
+                <h2 class="mt-2 font-serif text-2xl">Your Details</h2>
+                <p class="mt-2 text-sm text-stone-500">Update your contact info →</p>
+            </a>
+            @if (auth()->user()->isAdmin())
+                <a href="{{ route('admin.dashboard') }}" class="panel hover:bg-paper">
+                    <p class="section-eyebrow">Administration</p>
+                    <h2 class="mt-2 font-serif text-2xl">Store Dashboard</h2>
+                    <p class="mt-2 text-sm text-stone-500">Manage products and orders →</p>
+                </a>
+            @endif
+        </div>
+        <h2 class="mt-12 font-serif text-2xl">Recent Orders</h2>
+        <div class="mt-5 overflow-x-auto">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($orders as $order)
+                        <tr>
+                            <td>{{ $order->order_number }}</td>
+                            <td>{{ $order->created_at->format('M d, Y') }}</td>
+                            <td><span class="status-pill">{{ $order->status }}</span></td>
+                            <td>${{ number_format($order->total, 2) }}</td>
+                            <td><a class="text-olive underline"
+                                    href="{{ route('account.orders.show', $order) }}">Details</a>
+                            </td>
+                    </tr>@empty<tr>
+                            <td colspan="5" class="text-center">No orders yet.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <form method="POST" action="{{ route('logout') }}" class="mt-8">@csrf<button
+                class="text-sm font-semibold text-red-600 underline">Sign out</button></form>
+    </div>
 @endsection

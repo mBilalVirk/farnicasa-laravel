@@ -1,5 +1,23 @@
 @extends('layouts.store')
-@section('title','Sign In')
+@section('title', 'Sign In')
 @section('content')
-<section class="bg-paper py-16"><div class="mx-auto max-w-md px-5"><div class="border border-stone-200 bg-white p-8 shadow-soft"><p class="section-eyebrow">Welcome back</p><h1 class="mt-2 font-serif text-4xl">Sign In</h1><form action="{{ route('login') }}" method="POST" class="mt-8 space-y-5">@csrf<div><label class="field-label" for="email">Email Address</label><input class="field" type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="username" required autofocus></div><div><label class="field-label" for="password">Password</label><input class="field" type="password" name="password" id="password" autocomplete="current-password" required></div><label class="flex items-center gap-2 text-sm text-stone-600"><input type="checkbox" name="remember" value="1" class="rounded text-olive"> Remember me</label><button class="btn-dark w-full">Sign In →</button></form><p class="mt-6 text-center text-sm text-stone-500">New here? <a class="font-bold text-olive underline" href="{{ route('register') }}">Create an account</a></p></div></div></section>
+    <section class="bg-paper py-16">
+        <div class="mx-auto max-w-md px-5">
+            <div class="border border-stone-200 bg-white p-8 shadow-soft">
+                <p class="section-eyebrow">Welcome back</p>
+                <h1 class="mt-2 font-serif text-4xl">Sign In</h1>
+                <form action="{{ route('login') }}" method="POST" class="mt-8 space-y-5">@csrf<div><label class="field-label"
+                            for="email">Email Address</label><input class="field" type="email" name="email"
+                            id="email" value="{{ old('email') }}" autocomplete="username" required autofocus></div>
+                    <div><label class="field-label" for="password">Password</label><input class="field" type="password"
+                            name="password" id="password" autocomplete="current-password" required></div><label
+                        class="flex items-center gap-2 text-sm text-stone-600"><input type="checkbox" name="remember"
+                            value="1" class="rounded text-olive"> Remember me</label><button
+                        class="btn-dark w-full">Sign In →</button>
+                </form>
+                <p class="mt-6 text-center text-sm text-stone-500">New here? <a class="font-bold text-olive underline"
+                        href="{{ route('register') }}">Create an account</a></p>
+            </div>
+        </div>
+    </section>
 @endsection

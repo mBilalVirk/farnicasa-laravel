@@ -1,7 +1,87 @@
 @extends('layouts.admin')
-@section('title','Inventory Management')
+@section('title', 'Inventory Management')
 @section('content')
-<div class="mb-6"><p class="section-eyebrow">Stock Control & Audit Trail</p><h1 class="font-serif text-4xl">Inventory</h1><p class="mt-2 text-sm text-muted">Every manual adjustment and sale is recorded in the movement log.</p></div>
-<div class="panel overflow-hidden !p-0"><form class="flex gap-3 p-5" method="GET"><input name="q" class="field max-w-sm" value="{{ request('q') }}" placeholder="Product name or SKU"><button class="btn-dark">Find</button></form><div class="overflow-x-auto"><table class="admin-table"><thead><tr><th>Product</th><th>SKU</th><th>In Stock</th><th>Threshold</th><th>Adjust Stock</th></tr></thead><tbody>@forelse($products as $p)<tr><td class="font-semibold">{{ $p->name }}</td><td>{{ $p->sku }}</td><td class="{{ $p->is_low_stock?'font-bold text-red-600':'font-semibold text-emerald-700' }}">{{ $p->stock }}</td><td>{{ $p->low_stock_threshold }}</td><td><form action="{{ route('admin.inventory.adjust',$p) }}" method="POST" class="flex min-w-[410px] items-center gap-2">@csrf<input type="number" name="change" required min="-100000" max="100000" placeholder="+/- units" class="w-28 rounded border-stone-300 text-xs"><select name="reason" class="w-32 rounded border-stone-300 text-xs"><option value="restock">Restock</option><option value="correction">Correction</option><option value="damage">Damage</option><option value="return">Return</option></select><input name="notes" placeholder="Note (optional)" class="w-36 rounded border-stone-300 text-xs"><button class="btn-dark !px-3 !py-2 !text-xs">Save</button></form></td></tr>@empty<tr><td colspan="5">No products found.</td></tr>@endforelse</tbody></table></div><div class="p-5">{{ $products->links() }}</div></div>
-<h2 class="mt-10 mb-5 font-serif text-2xl">Recent Stock Movements</h2><div class="panel overflow-x-auto !p-0"><table class="admin-table"><thead><tr><th>Date</th><th>Product</th><th>Change</th><th>Stock After</th><th>Reason</th><th>By</th><th>Notes</th></tr></thead><tbody>@forelse($movements as $m)<tr><td>{{ $m->created_at->format('M d, H:i') }}</td><td>{{ $m->product?->name??'Deleted product' }}</td><td class="font-bold {{ $m->change<0?'text-red-600':'text-emerald-700' }}">{{ $m->change>0?'+':'' }}{{ $m->change }}</td><td>{{ $m->stock_after }}</td><td class="capitalize">{{ str_replace('_',' ',$m->reason) }}</td><td>{{ $m->user?->name??'System' }}</td><td>{{ $m->notes??'—' }}</td></tr>@empty<tr><td colspan="7">No inventory activity.</td></tr>@endforelse</tbody></table></div>
+    <div class="mb-6">
+        <p class="section-eyebrow">Stock Control & Audit Trail</p>
+        <h1 class="font-serif text-4xl">Inventory</h1>
+        <p class="mt-2 text-sm text-muted">Every manual adjustment and sale is recorded in the movement log.</p>
+    </div>
+    <div class="panel overflow-hidden !p-0">
+        <form class="flex gap-3 p-5" method="GET"><input name="q" class="field max-w-sm" value="{{ request('q') }}"
+                placeholder="Product name or SKU"><button class="btn-dark">Find</button></form>
+        <div class="overflow-x-auto">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>SKU</th>
+                        <th>In Stock</th>
+                        <th>Threshold</th>
+                        <th>Adjust Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($products as $p)
+                        <tr>
+                            <td class="font-semibold">{{ $p->name }}</td>
+                            <td>{{ $p->sku }}</td>
+                            <td
+                                class="{{ $p->is_low_stock ? 'font-bold text-red-600' : 'font-semibold text-emerald-700' }}">
+                                {{ $p->stock }}</td>
+                            <td>{{ $p->low_stock_threshold }}</td>
+                            <td>
+                                <form action="{{ route('admin.inventory.adjust', $p) }}" method="POST"
+                                    class="flex min-w-[410px] items-center gap-2">@csrf<input type="number" name="change"
+                                        required min="-100000" max="100000" placeholder="+/- units"
+                                        class="w-28 rounded border-stone-300 text-xs"><select name="reason"
+                                        class="w-32 rounded border-stone-300 text-xs">
+                                        <option value="restock">Restock</option>
+                                        <option value="correction">Correction</option>
+                                        <option value="damage">Damage</option>
+                                        <option value="return">Return</option>
+                                    </select><input name="notes" placeholder="Note (optional)"
+                                        class="w-36 rounded border-stone-300 text-xs"><button
+                                        class="btn-dark !px-3 !py-2 !text-xs">Save</button></form>
+                            </td>
+                    </tr>@empty<tr>
+                            <td colspan="5">No products found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <div class="p-5">{{ $products->links() }}</div>
+    </div>
+    <h2 class="mt-10 mb-5 font-serif text-2xl">Recent Stock Movements</h2>
+    <div class="panel overflow-x-auto !p-0">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Change</th>
+                    <th>Stock After</th>
+                    <th>Reason</th>
+                    <th>By</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($movements as $m)
+                    <tr>
+                        <td>{{ $m->created_at->format('M d, H:i') }}</td>
+                        <td>{{ $m->product?->name ?? 'Deleted product' }}</td>
+                        <td class="font-bold {{ $m->change < 0 ? 'text-red-600' : 'text-emerald-700' }}">
+                            {{ $m->change > 0 ? '+' : '' }}{{ $m->change }}</td>
+                        <td>{{ $m->stock_after }}</td>
+                        <td class="capitalize">{{ str_replace('_', ' ', $m->reason) }}</td>
+                        <td>{{ $m->user?->name ?? 'System' }}</td>
+                        <td>{{ $m->notes ?? '—' }}</td>
+                </tr>@empty<tr>
+                        <td colspan="7">No inventory activity.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 @endsection
